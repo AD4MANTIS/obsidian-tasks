@@ -161,6 +161,7 @@
       },
       "displayName": {
         "dataview": "Dataview",
+        "dataViewEmoji": "Dataview Emoji Format",
         "tasksEmojiFormat": "Tasks Emoji Format"
       },
       "name": "Task Format"

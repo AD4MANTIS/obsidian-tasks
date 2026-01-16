@@ -161,6 +161,7 @@
       },
       "displayName": {
         "dataview": "Dataview",
+        "dataViewEmoji": "",
         "tasksEmojiFormat": "Формат емодзі Tasks"
       },
       "name": "Формат задач"
