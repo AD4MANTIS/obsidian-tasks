@@ -52,14 +52,19 @@ export class PriorityTools {
     public static priorityValue(priority: string): Priority {
         switch (priority.toLowerCase()) {
             case 'lowest':
+            case '⏬':
                 return Priority.Lowest;
             case 'low':
+            case '🔽':
                 return Priority.Low;
             case 'medium':
+            case '🔼':
                 return Priority.Medium;
             case 'high':
+            case '⏫':
                 return Priority.High;
             case 'highest':
+            case '🔺':
                 return Priority.Highest;
             default:
                 return Priority.None;
