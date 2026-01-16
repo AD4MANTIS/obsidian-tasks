@@ -4,7 +4,7 @@ import {
     onlySuggestIfBracketOpen,
 } from '../Suggestor/Suggestor';
 import { DEFAULT_SYMBOLS } from '../TaskSerializer/DefaultTaskSerializer';
-import { DATAVIEW_SYMBOLS } from '../TaskSerializer/DataviewTaskSerializer';
+import { DATAVIEW_EMOJI_SYMBOLS, DATAVIEW_SYMBOLS } from '../TaskSerializer/DataviewTaskSerializer';
 import { StatusConfiguration } from '../Statuses/StatusConfiguration';
 import { Status } from '../Statuses/Status';
 import { DefaultTaskSerializer, type TaskSerializer } from '../TaskSerializer';
@@ -49,9 +49,20 @@ export const TASK_FORMATS = {
     },
     dataview: {
         getDisplayName: () => i18n.t('settings.format.displayName.dataview'),
-        taskSerializer: new DataviewTaskSerializer(),
+        taskSerializer: new DataviewTaskSerializer(DATAVIEW_SYMBOLS),
         buildSuggestions: onlySuggestIfBracketOpen(
             makeDefaultSuggestionBuilder(DATAVIEW_SYMBOLS, DEFAULT_MAX_GENERIC_SUGGESTIONS, true),
+            [
+                ['(', ')'],
+                ['[', ']'],
+            ],
+        ),
+    },
+    dataViewEmoji: {
+        getDisplayName: () => i18n.t('settings.format.displayName.dataViewEmoji'),
+        taskSerializer: new DataviewTaskSerializer(DATAVIEW_EMOJI_SYMBOLS),
+        buildSuggestions: onlySuggestIfBracketOpen(
+            makeDefaultSuggestionBuilder(DATAVIEW_EMOJI_SYMBOLS, DEFAULT_MAX_GENERIC_SUGGESTIONS, true),
             [
                 ['(', ')'],
                 ['[', ']'],

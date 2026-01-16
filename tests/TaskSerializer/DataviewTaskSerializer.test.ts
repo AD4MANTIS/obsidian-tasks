@@ -16,7 +16,7 @@ window.moment = moment;
 // NEW_TASK_FIELD_EDIT_REQUIRED
 
 describe('DataviewTaskSerializer', () => {
-    const taskSerializer = new DataviewTaskSerializer();
+    const taskSerializer = new DataviewTaskSerializer(DATAVIEW_SYMBOLS);
     const serialize = taskSerializer.serialize.bind(taskSerializer);
     const deserialize = taskSerializer.deserialize.bind(taskSerializer);
 

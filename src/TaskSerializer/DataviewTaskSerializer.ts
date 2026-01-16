@@ -2,7 +2,12 @@ import { TaskLayoutComponent } from '../Layout/TaskLayoutOptions';
 import { PriorityTools } from '../lib/PriorityTools';
 import type { Priority } from '../Task/Priority';
 import type { Task } from '../Task/Task';
-import { DefaultTaskSerializer, taskIdRegex, taskIdSequenceRegex } from './DefaultTaskSerializer';
+import {
+    DefaultTaskSerializer,
+    type DefaultTaskSerializerSymbols,
+    taskIdRegex,
+    taskIdSequenceRegex,
+} from './DefaultTaskSerializer';
 
 /**
  * Takes a regex of the form 'key:: value' and turns it into a regex that can parse
@@ -94,13 +99,36 @@ export const DATAVIEW_SYMBOLS = {
     },
 } as const;
 
+export const DATAVIEW_EMOJI_SYMBOLS = {
+    // NEW_TASK_FIELD_EDIT_REQUIRED
+    prioritySymbols: {
+        Highest: 'priority:: 🔺',
+        High: 'priority:: ⏫',
+        Medium: 'priority:: 🔼',
+        Low: 'priority:: 🔽',
+        Lowest: 'priority:: ⏬',
+        None: '',
+    },
+    startDateSymbol: '🛫::',
+    createdDateSymbol: '➕::',
+    scheduledDateSymbol: '⏳::',
+    dueDateSymbol: '📅::',
+    doneDateSymbol: '✅::',
+    cancelledDateSymbol: '❌::',
+    recurrenceSymbol: '🔁::',
+    onCompletionSymbol: '🏁::',
+    dependsOnSymbol: '⛔::',
+    idSymbol: '🆔::',
+    TaskFormatRegularExpressions: DATAVIEW_SYMBOLS.TaskFormatRegularExpressions,
+} as const;
+
 /**
  * A {@link TaskSerializer} that that reads and writes tasks compatible with
  *   [Dataview]{@link https://github.com/blacksmithgu/obsidian-dataview}
  */
 export class DataviewTaskSerializer extends DefaultTaskSerializer {
-    constructor() {
-        super(DATAVIEW_SYMBOLS);
+    constructor(public readonly symbols: DefaultTaskSerializerSymbols) {
+        super(symbols);
     }
 
     protected parsePriority(p: string): Priority {
